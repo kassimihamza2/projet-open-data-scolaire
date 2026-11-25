@@ -1,0 +1,79 @@
+schema: '2.0'
+stages:
+  reparation:
+    cmd: python src/reparation_structure.py
+    deps:
+    - path: data/raw/etablissements_scolaires.xls
+      hash: md5
+      md5: 63330b0e1f8834c0ca80a5547a7a0597
+      size: 1963008
+    - path: src/reparation_structure.py
+      hash: md5
+      md5: 6043d93de30eb822b3359967802c9ce7
+      size: 4679
+    outs:
+    - path: data/processed/etablissements_scolaires_corriges.csv
+      hash: md5
+      md5: 6c25e5a6dfc2423f19b17737916a3a08
+      size: 1757871
+  normalisation:
+    cmd: python src/normalisation.py
+    deps:
+    - path: data/processed/etablissements_scolaires_corriges.csv
+      hash: md5
+      md5: 6c25e5a6dfc2423f19b17737916a3a08
+      size: 1757871
+    - path: src/normalisation.py
+      hash: md5
+      md5: c5e76839aa99d2e7de3f6f6feff1fc38
+      size: 2459
+    outs:
+    - path: data/processed/etablissements_scolaires_normalises.csv
+      hash: md5
+      md5: 7a2bd5aa7583d7f75b0778ee5b12ba5b
+      size: 1757871
+  controle_qualite:
+    cmd: python src/controle_qualite.py
+    deps:
+    - path: data/processed/etablissements_scolaires_corriges.csv
+      hash: md5
+      md5: 6c25e5a6dfc2423f19b17737916a3a08
+      size: 1757871
+    - path: src/controle_qualite.py
+      hash: md5
+      md5: 4ff3857d40496517a1267ad34b9289cd
+      size: 2156
+  analyse_exploratoire:
+    cmd: python src/analyse_exploratoire.py
+    deps:
+    - path: data/processed/etablissements_scolaires_normalises.csv
+      hash: md5
+      md5: 7a2bd5aa7583d7f75b0778ee5b12ba5b
+      size: 1757871
+    - path: src/analyse_exploratoire.py
+      hash: md5
+      md5: ea1141400c551dcd21ceaefbbfdd462f
+      size: 4151
+    outs:
+    - path: reports/eda
+      hash: md5
+      md5: 4f45e8553faa87251d1f01b4b1eeec97.dir
+      size: 25721
+      nfiles: 6
+  visualisation:
+    cmd: python src/visualisation.py
+    deps:
+    - path: data/processed/etablissements_scolaires_normalises.csv
+      hash: md5
+      md5: 7a2bd5aa7583d7f75b0778ee5b12ba5b
+      size: 1757871
+    - path: src/visualisation.py
+      hash: md5
+      md5: cd8d2aabc2231cf632303f7476c09902
+      size: 4066
+    outs:
+    - path: reports/figures
+      hash: md5
+      md5: ffa18820f363d7fba61d7d519261f48b.dir
+      size: 885042
+      nfiles: 5

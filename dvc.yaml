@@ -1,0 +1,38 @@
+stages:
+  reparation:
+    cmd: python src/reparation_structure.py
+    deps:
+      - src/reparation_structure.py
+      - data/raw/etablissements_scolaires.xls
+    outs:
+      - data/processed/etablissements_scolaires_corriges.csv
+
+  normalisation:
+    cmd: python src/normalisation.py
+    deps:
+      - src/normalisation.py
+      - data/processed/etablissements_scolaires_corriges.csv
+    outs:
+      - data/processed/etablissements_scolaires_normalises.csv
+
+  controle_qualite:
+    cmd: python src/controle_qualite.py
+    deps:
+      - src/controle_qualite.py
+      - data/processed/etablissements_scolaires_corriges.csv
+
+  analyse_exploratoire:
+    cmd: python src/analyse_exploratoire.py
+    deps:
+      - src/analyse_exploratoire.py
+      - data/processed/etablissements_scolaires_normalises.csv
+    outs:
+      - reports/eda
+
+  visualisation:
+    cmd: python src/visualisation.py
+    deps:
+      - src/visualisation.py
+      - data/processed/etablissements_scolaires_normalises.csv
+    outs:
+      - reports/figures
