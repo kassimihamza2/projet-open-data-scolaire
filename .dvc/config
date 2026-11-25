@@ -1,2 +1,7 @@
 [core]
     autostage = true
+    remote = stockage
+['remote "gdrive"']
+    url = gdrive://root/dvcstore
+['remote "stockage"']
+    url = ../../dvc-stockage
