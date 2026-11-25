@@ -1,0 +1,5 @@
+outs:
+- md5: 63330b0e1f8834c0ca80a5547a7a0597
+  size: 1963008
+  hash: md5
+  path: etablissements_scolaires.xls

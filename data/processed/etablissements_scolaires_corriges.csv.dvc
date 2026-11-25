@@ -1,0 +1,5 @@
+outs:
+- md5: 6c25e5a6dfc2423f19b17737916a3a08
+  size: 1757871
+  hash: md5
+  path: etablissements_scolaires_corriges.csv
